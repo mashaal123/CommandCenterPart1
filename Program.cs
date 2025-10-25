@@ -11,6 +11,7 @@ namespace CommandCenterPart1
     {
         static void Main(string[] args)
         {
+            //part1
             String UserName = "Guest";
             bool isOperational = true;
             int commandsProcessed=0;
