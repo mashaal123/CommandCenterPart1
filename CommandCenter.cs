@@ -42,7 +42,7 @@ namespace CommandCenterPart1
                 }
                 else if (user == "set_name")
                 {
-                   SetUserName();
+                   UserName =SetUserName();
                     CommandsProcessed++;
                 }
                 else if (user == "status")
@@ -77,8 +77,8 @@ namespace CommandCenterPart1
         {
             Console.WriteLine("\nNew Name:");
             Console.WriteLine("Enter your new name: ");
-            string NewName = Console.ReadLine();
-            return NewName;
+            string New = Console.ReadLine();
+            return New;
 
         }
 
