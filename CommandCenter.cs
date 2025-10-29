@@ -12,7 +12,7 @@ namespace CommandCenterPart1
     {
 
         public String UserName { get;  set; }
-        public bool IsOperational { get;  set; }
+        public bool IsOperational { get; set; } = true;
         public int CommandsProcessed { get;  set; }
 
         private readonly List<string> _commandHistory = new List<string>();
