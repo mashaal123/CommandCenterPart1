@@ -10,10 +10,11 @@ namespace CommandCenterPart1
     {
         public string Name => "exit";
 
-        public void Execute(CommandCenter center)
+        public Task ExecuteAsync (CommandCenter center)
         {
             Console.WriteLine("Goodbye, " + center.UserName);
             center.IsOperational = false;
+            return Task.CompletedTask;
         }
     }
 }

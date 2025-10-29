@@ -10,15 +10,23 @@ namespace CommandCenterPart1
     {
         public string Name => "set_name";
 
-        public void Execute(CommandCenter center)
+        public Task ExecuteAsync(CommandCenter center)
         {
             Console.Write("\nEnter your new name: ");
-            string newName = Console.ReadLine();
+           
+            var newName = Console.ReadLine();
+
             if (!string.IsNullOrWhiteSpace(newName))
             {
                 center.UserName = newName.Trim();
                 Console.WriteLine("User name updated!\n");
             }
+            else
+            {
+                Console.WriteLine("Name not changed.\n");
+            }
+            return Task.CompletedTask;
+
         }
     }
 }

@@ -8,55 +8,60 @@ using System.Windows.Input;
 
 namespace CommandCenterPart1
 {
-    public class CommandCenter
+    public class CommandCenter 
     {
 
         public String UserName { get;  set; }
         public bool IsOperational { get;  set; }
         public int CommandsProcessed { get;  set; }
 
+        private readonly List<string> _commandHistory = new List<string>();
+        public IReadOnlyList<string> CommandHistory => _commandHistory;
+
+
 
         private readonly Dictionary<string, ICommand> _commands;
         public CommandCenter()
         {
 
-            UserName = "Guest";
-            IsOperational = true;
-            CommandsProcessed = 0;
 
-
-            _commands = new Dictionary<string, ICommand>
-            {
-                {"help",new HelpCommand() },
-                {"status",new StatusCommand() },
-                {"set_name",new SetNameCommand() },
-                {"exit",new ExitCommand() },
-            };
-
-        }
-        public void Run()
+            _commands = new Dictionary<string, ICommand>(StringComparer.OrdinalIgnoreCase)
         {
 
-            Console.WriteLine("Welcome to the CommandCenter Applicatione");
-            Console.WriteLine(" Enter 'help' to see the list of Command");
+                ["help"]                = new HelpCommand(),
+                ["status"]              = new StatusCommand(),
+                ["set_name"]            = new SetNameCommand(),
+                ["exit"]                = new ExitCommand(),
+                ["history"]             = new HistoryCommand(),
+                ["search_history"]      = new SearchHistoryCommand(),
+                ["diagnostics"]         = new RunDiagnosticsCommand(),
+            };
 
+
+        }
+        public async Task RunAsync()
+        {
+            Console.WriteLine("Welcome to the CommandCenter Application");
+            Console.WriteLine("Enter 'help' to see the list of Command\n");
 
             while (IsOperational)
             {
+               
+                var user = Console.ReadLine();
+                var key = (user ?? "").Trim();
 
-                string user = Console.ReadLine().ToLower(); // 
+                if (string.IsNullOrEmpty(key))
+                    continue;
 
-
-                if (_commands.ContainsKey(user))
+                if (_commands.TryGetValue(key, out var cmd))
                 {
-                    _commands[user].Execute(this);
+                    _commandHistory.Add(key);       
+                    await cmd.ExecuteAsync(this);   
                     CommandsProcessed++;
                 }
-
                 else
                 {
-                    Console.WriteLine("Invalid command. write 'help' to see available commands.");
-
+                    Console.WriteLine("Invalid command. Type 'help' to see available commands.\n");
                 }
             }
         }

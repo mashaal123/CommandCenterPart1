@@ -9,12 +9,12 @@ namespace CommandCenterPart1
 {
     public class Program
     {
-        static void Main(string[] args)
+       public static async Task Main(string[] args)
         {
   
             
-            CommandCenter center = new CommandCenter(); 
-            center.Run();
+            var center = new CommandCenter(); 
+           await center.RunAsync();
            
                 }
             }

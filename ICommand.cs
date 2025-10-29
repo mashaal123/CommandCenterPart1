@@ -11,7 +11,7 @@ namespace CommandCenterPart1
 
     {
             string Name { get; }
-            void Execute(CommandCenter center);
+            Task ExecuteAsync(CommandCenter center);
         
     }
 }

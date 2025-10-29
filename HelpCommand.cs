@@ -10,13 +10,17 @@ namespace CommandCenterPart1
     {
         public string Name => "help";
 
-        public void Execute(CommandCenter center)
+        public Task ExecuteAsync (CommandCenter center)
         {
             Console.WriteLine("\nAvailable Commands:");
-            Console.WriteLine("help      - Show list of commands");
-            Console.WriteLine("set_name  - Change the user name");
-            Console.WriteLine("status    - Show current status");
-            Console.WriteLine("exit      - Exit the program\n");
+            Console.WriteLine("help             - Show list of commands");
+            Console.WriteLine("set_name         - Change the user name");
+            Console.WriteLine("status           - Show current status");
+            Console.WriteLine("history          - Show recent command");
+            Console.WriteLine("search_history   - search commands history");
+            Console.WriteLine("diagnostics      - Run simulated system diagnostics");
+            Console.WriteLine("exit             - Exit the program\n");
+            return Task.CompletedTask;
         }
     }
 }

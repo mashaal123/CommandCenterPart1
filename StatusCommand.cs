@@ -10,12 +10,13 @@ namespace CommandCenterPart1
     {
         public string Name => "status";
 
-        public void Execute(CommandCenter center)
+        public Task ExecuteAsync(CommandCenter center)
         {
             Console.WriteLine("\nStatus:");
             Console.WriteLine("User Name: " + center.UserName);
             Console.WriteLine("Operational: " + center.IsOperational);
             Console.WriteLine("Commands Processed: " + center.CommandsProcessed + "\n");
+            return Task.CompletedTask;
         }
     }
 }
